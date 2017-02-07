@@ -1,0 +1,15 @@
+{
+  "name": "diber",
+  "version": "1.0.0",
+  "description": "Diber app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/"
+  },
+  "author": "Alexander Tereshkov",
+  "license": "MIT"
+}
