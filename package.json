@@ -1,21 +1,29 @@
 {
-  "name": "diber",
-  "version": "1.0.0",
-  "description": "Diber app",
-  "main": "index.js",
+  "name": "HappyNewsReader",
+  "version": "0.0.0",
   "scripts": {
-    "start": "node index.js"
+    "start": "node ./bin/index.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "express": "~4.14.1",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.2"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/"
+    "url": "https://github.com/handioq/nodejs-HappyNewsReader"
   },
   "author": "Alexander Tereshkov",
   "license": "MIT",
   "contributors": [
-    { "name" : "Balakhanov Oleg",
-      "email" : "balaxanov_ov_14@stdent.grsu.by",
-      "url" : "http://github.com/olegbal"
+    { 
+		"name" : "Balakhanov Oleg",
+		"email" : "balaxanov_ov_14@student.grsu.by",
+		"url" : "http://github.com/olegbal"
     }
   ]
 }
