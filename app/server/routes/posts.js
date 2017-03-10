@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-//var posts = require('./posts');
-
-//app.use('/posts', posts);
+router.get('/', (req, res) => {
+    res.send('Hello World from posts!')
+});
 
 module.exports = router;
