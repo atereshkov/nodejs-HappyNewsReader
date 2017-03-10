@@ -2,16 +2,11 @@
   "name": "HappyNewsReader",
   "version": "0.0.0",
   "scripts": {
-    "start": "node ./bin/index.js"
+    "start": "nodemon ./app/index.js"
   },
   "dependencies": {
-    "body-parser": "~1.16.0",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.0",
     "express": "~4.14.1",
-    "jade": "~1.11.0",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.2"
+    "mongodb": "^2.2.24"
   },
   "repository": {
     "type": "git",
@@ -20,10 +15,13 @@
   "author": "Alexander Tereshkov",
   "license": "MIT",
   "contributors": [
-    { 
-		"name" : "Balakhanov Oleg",
-		"email" : "balaxanov_ov_14@student.grsu.by",
-		"url" : "http://github.com/olegbal"
+    {
+      "name": "Balakhanov Oleg",
+      "email": "balaxanov_ov_14@student.grsu.by",
+      "url": "http://github.com/olegbal"
     }
-  ]
+  ],
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
 }
