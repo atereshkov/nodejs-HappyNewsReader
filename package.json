@@ -2,7 +2,7 @@
   "name": "HappyNewsReader",
   "version": "0.0.0",
   "scripts": {
-    "start": "nodemon ./app/index.js"
+    "start": "nodemon ./app/server/index.js"
   },
   "dependencies": {
     "express": "~4.14.1",
