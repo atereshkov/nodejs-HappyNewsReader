@@ -25,7 +25,6 @@ The service provides access to news with "positive/happy” orientation. This me
 * Ability to add posts to user’s favorites
 * Search for posts by some criteria (post header)
 * Get posts by weeks (for example, from 03/19/2017 to 03/26/2017)
-* Administrator can manage posts: create, delete, edit.
 * Pagination
 
 ## Use case diagram
@@ -37,7 +36,6 @@ Coming soon...
 * Posts
 * Favorites
 * User
-* Admin
 * Guest
 
 ## REST API
@@ -49,32 +47,26 @@ Coming soon...
 
 #### Posts
 
-* GET /api/v1/posts - get all posts (guest / user / admin)
-* GET /api/v1/posts?page=2&limit=20 - get posts with pagination (guest / user / admin)
-* GET /api/v1/posts?header=Some search criteria - search posts with specific headers (guest / user / admin)
-* GET /api/v1/posts?from=03/19/2017&to=03/26/2017 - (guest / user / admin) (or unix timestamp would be better? from=1331162374&to=1331162999)
-* GET /api/v1/posts/225 - get post by id (guest / user / admin)
-* POST /api/v1/posts - add new post (admin)
-* PUT /api/v1/posts/225 - edit post by id (admin)
-* DELETE /api/v1/posts/225 - delete post by id (admin)
+* GET /api/v1/posts - get all posts (guest / user)
+* GET /api/v1/posts?page=2&limit=20 - get posts with pagination (guest / user)
+* GET /api/v1/posts?header=Some search criteria - search posts with specific headers (guest / user)
+* GET /api/v1/posts?from=03/19/2017&to=03/26/2017 - (guest / user) (or unix timestamp would be better? from=1331162374&to=1331162999)
+* GET /api/v1/posts/225 - get post by id (guest / user)
 
 #### Favorites
 
-* GET /api/v1/users/10/favorites - get user's favorite posts (user / admin)
-* GET /api/v1/users/10/favorites/10 - get user favorite post by id (user / admin)
-* POST /api/v1/users/10/favorites - add post to favorites (user / admin)
+* GET /api/v1/users/10/favorites - get user's favorite posts (user)
+* POST /api/v1/users/10/favorites - add post to favorites (user)
 
 #### Users
 
-* GET /api/v1/users - get all users (admin)
-* GET /api/v1/users/10 - get user by id (admin / user)
-* DELETE /api/v1/users/10 - delete user by id (admin)
+* GET /api/v1/users/10 - get user by id (user)
 
 ## Design
 
 Coming soon...
 
-## Start
+## Start server
 
 * Go to the app folder
 * Run npm install
