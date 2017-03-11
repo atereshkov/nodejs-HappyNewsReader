@@ -7,7 +7,6 @@ var config = require('./config');
 var request = require("request"),
     cheerio = require("cheerio"),
     url = "http://s13.ru/";
-    //url = "https://news.ycombinator.com";
 
 request(url, function (error, response, body) {
     if (!error) {
