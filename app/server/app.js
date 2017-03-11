@@ -6,16 +6,29 @@ var config = require('./config');
 
 var request = require("request"),
     cheerio = require("cheerio"),
-    url = "http://www.wunderground.com/cgi-bin/findweather/getForecast?&query=02888";
+    url = "http://s13.ru/";
+    //url = "https://news.ycombinator.com";
 
 request(url, function (error, response, body) {
     if (!error) {
-        var $ = cheerio.load(body),
-            temperature = $("[data-variable='temperature'] .wx-value").html();
+        var $ = cheerio.load(body);
 
-        console.log("Температура " + temperature + " градусов по Фаренгейту.");
+        $('div.item').each(function(i, element) {
+            var a = $(this);
+            var header = a.children('.itemhead').text();
+            var text = a.children('.itemtext').text();
+            var url = a.children('.itemhead').attr('href');
+
+            var metadata = {
+                header: header,
+                text: text,
+                url: url
+            };
+            console.log(metadata);
+        });
+
     } else {
-        console.log("Произошла ошибка: " + error);
+        console.log("Error: " + error);
     }
 });
 
