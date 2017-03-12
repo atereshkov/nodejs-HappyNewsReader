@@ -5,11 +5,12 @@ var routes = require('./routes');
 var config = require('./config');
 
 var request = require("request"),
-    cheerio = require("cheerio"),
-    url = "http://s13.ru/";
+    cheerio = require("cheerio");
 
-request(url, function (error, response, body) {
+request(config.SITE_URL, function (error, response, body) {
     if (!error) {
+        var parsedResults = [];
+
         var $ = cheerio.load(body);
 
         $('div.item').each(function(i, element) {
@@ -23,9 +24,9 @@ request(url, function (error, response, body) {
                 text: text,
                 url: url
             };
-            console.log(metadata);
+            parsedResults.push(metadata);
         });
-
+        console.log(parsedResults);
     } else {
         console.log("Error: " + error);
     }
