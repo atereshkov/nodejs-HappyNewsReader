@@ -14,10 +14,10 @@ request(config.SITE_URL, function (error, response, body) {
         var $ = cheerio.load(body);
 
         $('div.item').each(function(i, element) {
-            var a = $(this);
-            var header = a.children('.itemhead').text();
-            var text = a.children('.itemtext').text();
-            var url = a.children('.itemhead').attr('href');
+            var item = $(this);
+            var header = item.children('.itemhead').children('h3').children('a').prev().text();
+            var text = item.children('.itemtext').text();
+            var url = item.children('.itemhead').children('h3').children('a').prev().attr('href');
 
             var metadata = {
                 header: header,
