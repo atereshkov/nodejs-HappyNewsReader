@@ -18,11 +18,13 @@ request(config.SITE_URL, function (error, response, body) {
             var header = item.children('.itemhead').children('h3').children('a').prev().text();
             var text = item.children('.itemtext').text();
             var url = item.children('.itemhead').children('h3').children('a').prev().attr('href');
+            var img = item.children('.itemtext').children('p').children('a').children('img').attr("src");
 
             var metadata = {
                 header: header,
                 text: text,
-                url: url
+                url: url,
+                img: img
             };
             parsedResults.push(metadata);
         });
