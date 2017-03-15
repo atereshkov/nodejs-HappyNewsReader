@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+const bodyParser = require('body-parser');
 
 var routes = require('./routes');
 var config = require('./config');
@@ -34,6 +35,8 @@ request(config.SITE_URL, function (error, response, body) {
     }
 });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(config.API_URL, routes);
 
 app.listen(config.PORT, function() {
