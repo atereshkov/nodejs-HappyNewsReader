@@ -84,30 +84,41 @@ router.post('/', function (req, res) {
         img: req.body.img
     });
 
-    post.save(function (err) {
-        if (!err) {
+    // todo extract and refactor
+    Post.count({header: req.body.header}, function (err, count) {
+        if (count > 0) {
+            res.statusCode = 409;
             return res.json({
-                status: 'OK',
-                data: post
+                error: 'Post with this header already exists'
             });
-
         } else {
-            console.log('Error', err);
+            post.save(function (err) {
+                if (!err) {
+                    return res.json({
+                        status: 'OK',
+                        data: post
+                    });
 
-            if (err.name === 'ValidationError') {
-                res.statusCode = 400;
-                res.json({
-                    error: 'Validation error'
-                });
-            } else {
-                res.statusCode = 500;
+                } else {
+                    console.log('Error', err);
 
-                res.json({
-                    error: 'Server error'
-                });
-            }
+                    if (err.name === 'ValidationError') {
+                        res.statusCode = 400;
+                        res.json({
+                            error: 'Validation error'
+                        });
+                    } else {
+                        res.statusCode = 500;
+
+                        res.json({
+                            error: 'Server error'
+                        });
+                    }
+                }
+            });
         }
     });
+
 });
 
 module.exports = router;
