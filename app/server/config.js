@@ -11,4 +11,4 @@ const SITE_URL = "http://s13.ru/";
 
 const DATABASE_CONNECTION_URL = "mongodb://user:root@ds131900.mlab.com:31900/hnreader";
 
-module.exports = { PORT, API_URL, SITE_URL, DATABASE_CONNECTION_URL };
+module.exports = {PORT, API_URL, SITE_URL, DATABASE_CONNECTION_URL};

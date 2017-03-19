@@ -23,7 +23,7 @@ router.get('/update', (req, res) => {
 
             var $ = cheerio.load(body);
 
-            $('div.item').each(function(i, element) {
+            $('div.item').each(function (i, element) {
                 var item = $(this);
                 var header = item.children('.itemhead').children('h3').children('a').prev().text();
                 var text = item.children('.itemtext').text();
@@ -47,11 +47,11 @@ router.get('/update', (req, res) => {
     });
 });
 
-router.get('/:id', function(req, res) {
+router.get('/:id', function (req, res) {
 
     Post.findById(req.params.id, function (err, post) {
 
-        if(!post) {
+        if (!post) {
             res.statusCode = 404;
 
             return res.json({
@@ -75,7 +75,7 @@ router.get('/:id', function(req, res) {
     });
 });
 
-router.post('/', function(req, res) {
+router.post('/', function (req, res) {
 
     var post = new Post({
         header: req.body.header,
@@ -94,7 +94,7 @@ router.post('/', function(req, res) {
         } else {
             console.log('Error', err);
 
-            if(err.name === 'ValidationError') {
+            if (err.name === 'ValidationError') {
                 res.statusCode = 400;
                 res.json({
                     error: 'Validation error'

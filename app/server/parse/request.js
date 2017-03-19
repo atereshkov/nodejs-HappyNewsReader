@@ -9,7 +9,7 @@ request(config.SITE_URL, function (error, response, body) {
 
         var $ = cheerio.load(body);
 
-        $('div.item').each(function(i, element) {
+        $('div.item').each(function (i, element) {
             var item = $(this);
             var header = item.children('.itemhead').children('h3').children('a').prev().text();
             var text = item.children('.itemtext').text();
