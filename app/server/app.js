@@ -3,7 +3,7 @@ var app = express();
 
 var routes = require('./routes');
 var config = require('./config');
-
+var path =require('path');
 var request = require("request"),
     cheerio = require("cheerio");
 
@@ -35,7 +35,7 @@ request(config.SITE_URL, function (error, response, body) {
 });
 
 app.use(config.API_URL, routes);
-
+app.use(express.static(path.join(__dirname,config.STATIC_RESOURCES_PATH)));
 app.listen(config.PORT, function() {
     console.log(`Working on ${config.PORT}`)
 });
