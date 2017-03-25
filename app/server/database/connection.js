@@ -1,16 +1,26 @@
 var mongoose = require('mongoose');
 var config = require('./../config');
 
-mongoose.connect(config.DATABASE_CONNECTION_URL);
-
 var db = mongoose.connection;
 
-db.on('error', function (err) {
-    console.log('Connection error:', err.message);
-});
+function connectToDatabase(onConnected, onError) {
+    mongoose.connect(config.DATABASE_CONNECTION_URL);
 
-db.once('open', function callback() {
-    console.log("Connected to DB!");
-});
+    db.once('open', function callback() {
+        console.log("Connected to DB!");
+        onConnected('success');
+    });
 
-module.exports = mongoose;
+    db.on('error', function (err) {
+        console.log('Connection error:', err.message);
+        onError(err);
+    });
+}
+
+function connect() {
+    return new Promise((onConnected, onError) => {
+        connectToDatabase(onConnected, onError);
+    });
+}
+
+module.exports = connect;

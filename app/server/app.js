@@ -1,18 +1,32 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
+const logger = require('morgan');
 
-var routes = require('./routes');
-var config = require('./config');
-// var path =require('path');
+const routes = require('./routes');
+const config = require('./config');
+const db = require('./database/connection');
+// var path = require('path');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(config.API_URL, routes);
-// app.use(express.static(path.join(__dirname,config.STATIC_RESOURCES_PATH)));
+db()
+    .then(
+        onConnected => startServer(),
+        onError => console.log("Error due connection to db: " + onError.message)
+    )
+    .catch(onError => {
+        console.log(onError);
+    });
 
-app.listen(config.PORT, function () {
-    console.log(`Working on ${config.PORT}`)
-});
+function startServer() {
+    app.use(logger('dev'));
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(config.API_URL, routes);
+    // app.use(express.static(path.join(__dirname,config.STATIC_RESOURCES_PATH)));
+
+    app.listen(config.PORT, function () {
+        console.log(`Server started and working on ${config.PORT}`)
+    });
+}
 
 module.exports = app;
