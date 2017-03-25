@@ -1,13 +1,15 @@
 {
   "name": "HappyNewsReader",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "scripts": {
     "start": "nodemon ./app/server/app.js"
   },
   "dependencies": {
+    "body-parser": "^1.17.1",
     "cheerio": "^0.22.0",
     "express": "~4.14.1",
     "mongodb": "^2.2.24",
+    "mongoose": "^4.9.0",
     "request": "^2.81.0"
   },
   "repository": {
