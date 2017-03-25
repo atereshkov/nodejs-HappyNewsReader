@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const logger = require('morgan');
 
 const routes = require('./routes');
 const config = require('./config');
@@ -14,6 +15,7 @@ db()
     );
 
 function startServer() {
+    app.use(logger('dev'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(config.API_URL, routes);
