@@ -51,25 +51,24 @@ router.get('/:id', function (req, res) {
 
     Post.findById(req.params.id, function (err, post) {
 
+        if (err) {
+            res.statusCode = 500;
+
+            return res.json({
+                error: 'Server error'
+            });
+        } else {
+            return res.json({
+                status: 'OK',
+                data: post
+            });
+        }
+
         if (!post) {
             res.statusCode = 404;
 
             return res.json({
                 error: 'Not found'
-            });
-        }
-
-        if (!err) {
-            return res.json({
-                status: 'OK',
-                data: post
-            });
-
-        } else {
-            res.statusCode = 500;
-
-            return res.json({
-                error: 'Server error'
             });
         }
     });
@@ -93,13 +92,7 @@ router.post('/', function (req, res) {
             });
         } else {
             post.save(function (err) {
-                if (!err) {
-                    return res.json({
-                        status: 'OK',
-                        data: post
-                    });
-
-                } else {
+                if (err) {
                     console.log('Error', err);
 
                     if (err.name === 'ValidationError') {
@@ -114,6 +107,12 @@ router.post('/', function (req, res) {
                             error: 'Server error'
                         });
                     }
+                } else {
+                    return res.json({
+                        status: 'OK',
+                        data: post
+                    });
+
                 }
             });
         }
