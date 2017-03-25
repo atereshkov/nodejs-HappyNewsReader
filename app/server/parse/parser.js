@@ -3,9 +3,13 @@ var request = require("request"),
 
 var config = require('../config');
 
-var fetchData = function (err, data) {
+// todo logger
+function requestPosts(onParsed, onError) {
     request(config.SITE_URL, function (error, response, body) {
-        if (!error) {
+        if (error) {
+            console.log("Error: " + error);
+            onError(error);
+        } else {
             var parsedResults = [];
 
             var $ = cheerio.load(body);
@@ -25,12 +29,15 @@ var fetchData = function (err, data) {
                 };
                 parsedResults.push(metadata);
             });
-            console.log(parsedResults);
-
-        } else {
-            console.log("Error: " + error);
+            onParsed(parsedResults);
         }
     });
-};
+}
 
-module.exports = {fetchData};
+function fetchPosts() {
+    return new Promise((onParsed, onError) => {
+        requestPosts(onParsed, onError);
+    });
+}
+
+module.exports = {fetchPosts};

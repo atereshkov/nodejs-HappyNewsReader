@@ -12,7 +12,10 @@ db()
     .then(
         onConnected => startServer(),
         onError => console.log("Error due connection to db: " + onError.message)
-    );
+    )
+    .catch(onError => {
+        console.log(onError);
+    });
 
 function startServer() {
     app.use(logger('dev'));
@@ -22,7 +25,7 @@ function startServer() {
     // app.use(express.static(path.join(__dirname,config.STATIC_RESOURCES_PATH)));
 
     app.listen(config.PORT, function () {
-        console.log(`Working on ${config.PORT}`)
+        console.log(`Server started and working on ${config.PORT}`)
     });
 }
 
