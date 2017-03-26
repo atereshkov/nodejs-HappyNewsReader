@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const httpLogger = require('morgan');
 const cron = require('node-cron');
 const log = require('winston');
+const request = require("request");
 
 const routes = require('./routes');
 const config = require('./config');
@@ -34,7 +35,13 @@ function startServer() {
 
 function startCron() {
     cron.schedule('*/1 * * * *', function(){
-        log.info('running a task every minute');
+        request("http://localhost:3000/api/v1/posts/update", function (error, response, body) {
+            if (error) {
+                log.error("Error: " + error);
+            } else {
+                log.info("Cron request for update posts.");
+            }
+        });
     });
 }
 
