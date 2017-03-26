@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const cron = require('node-cron');
 
 const routes = require('./routes');
 const config = require('./config');
@@ -13,6 +14,7 @@ db()
         onConnected => startServer(),
         onError => console.log("Error due connection to db: " + onError.message)
     )
+    .then(startCron)
     .catch(onError => {
         console.log(onError);
     });
@@ -26,6 +28,12 @@ function startServer() {
 
     app.listen(config.PORT, function () {
         console.log(`Server started and working on ${config.PORT}`)
+    });
+}
+
+function startCron() {
+    cron.schedule('*/1 * * * *', function(){
+        console.log('running a task every minute');
     });
 }
 
