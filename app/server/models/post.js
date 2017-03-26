@@ -8,11 +8,22 @@ var Post = new Schema({
     img: {type: String, required: false}
 });
 
-Post.statics.existWithUrl = function (url) {
-    this.count({url: url}, function (err, count) {
-        if (count > 0) {
+Post.statics.isAlreadyExists = function (post) {
+    return new Promise((onExist, onNoRecord, onError) => {
+        const PostModel = mongoose.model('Post', Post);
 
-        }
+        PostModel.count({url: post.url}, function (err, count) {
+            if (err) {
+                console.log(err);
+                onError(err);
+            }
+
+            if (count > 0) {
+                onExist(count);
+            } else {
+                onNoRecord(count);
+            }
+        });
     });
 };
 
@@ -22,8 +33,11 @@ Post.statics.savePosts = function (posts) {
     });
 };
 
+// todo need promise for response
 function savePosts(posts, onSaved, onError) {
+
     const PostModel = mongoose.model('Post', Post);
+    let savedPostsCount = 0;
 
     for (let i = 0; i < posts.length; i++) {
         let post = new PostModel({
@@ -33,15 +47,28 @@ function savePosts(posts, onSaved, onError) {
             img: posts[i].img
         });
 
-        post.save(function (err) {
-            if (err) {
-                console.log('Error', err);
-            } else {
-                console.log("Post with url " + posts[i].url + " saved");
-            }
-        });
+        PostModel.isAlreadyExists(post)
+            .then(
+                onExist => console.log("Post with url " + post.url + " already exists in database: " + onExist),
+                onNoRecord => save(),
+                onError => console.log(onError))
+            .catch(onError => {
+                console.log(onError);
+            });
+
+        function save() {
+            post.save(function (err) {
+                if (err) {
+                    console.log('Error', err);
+                } else {
+                    console.log("Post with url " + posts[i].url + " saved");
+                    savedPostsCount++;
+                }
+            });
+        }
     }
-    onSaved(posts);
+
+    onSaved(savedPostsCount);
 }
 
 module.exports = mongoose.model('Post', Post);

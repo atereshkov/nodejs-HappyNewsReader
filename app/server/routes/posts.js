@@ -47,15 +47,13 @@ router.get('/update', (req, res) => {
     }
 
     function saveToDatabase(data) {
-        //Post.existWithUrl().then();
-
         Post.savePosts(data)
             .then(
-                onSaved => res.send('Posts are parsed and saved to database: ' + data.length),
+                onSaved => res.send('Posts are parsed and saved to database: ' + onSaved),
                 onError => res.send("Error during saving posts: " + onError.message)
             ).catch(onError => {
-                console.log(onError);
-            });
+            console.log(onError);
+        });
     }
 });
 
@@ -96,7 +94,6 @@ router.post('/', function (req, res) {
         img: req.body.img
     });
 
-    // todo extract and refactor
     Post.count({header: req.body.header}, function (err, count) {
         if (count > 0) {
             res.statusCode = 409;
