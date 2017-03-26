@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const logger = require('morgan');
+const httpLogger = require('morgan');
 const cron = require('node-cron');
+const log = require('winston');
 
 const routes = require('./routes');
 const config = require('./config');
@@ -12,28 +13,28 @@ const db = require('./database/connection');
 db()
     .then(
         onConnected => startServer(),
-        onError => console.log("Error due connection to db: " + onError.message)
+        onError => log.error("Error due connection to db: " + onError.message)
     )
     .then(startCron)
     .catch(onError => {
-        console.log(onError);
+        log.error(onError);
     });
 
 function startServer() {
-    app.use(logger('dev'));
+    app.use(httpLogger('dev'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(config.API_URL, routes);
     // app.use(express.static(path.join(__dirname,config.STATIC_RESOURCES_PATH)));
 
     app.listen(config.PORT, function () {
-        console.log(`Server started and working on ${config.PORT}`)
+        log.info(`Server started and working on ${config.PORT}`)
     });
 }
 
 function startCron() {
     cron.schedule('*/1 * * * *', function(){
-        console.log('running a task every minute');
+        log.info('running a task every minute');
     });
 }
 

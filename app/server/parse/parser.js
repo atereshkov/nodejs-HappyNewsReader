@@ -2,12 +2,12 @@ var request = require("request"),
     cheerio = require("cheerio");
 
 var config = require('../config');
+const log = require('winston');
 
-// todo logger
 function requestPosts(onParsed, onError) {
     request(config.SITE_URL, function (error, response, body) {
         if (error) {
-            console.log("Error: " + error);
+            log.error("Error: " + error);
             onError(error);
         } else {
             var parsedResults = [];

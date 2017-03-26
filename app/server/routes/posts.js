@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var parser = require('../parse/parser');
+const log = require('winston');
 
 var Post = require('../models/post');
 
@@ -34,7 +35,7 @@ router.get('/update', (req, res) => {
             onParsed => onSuccess(onParsed),
             onError => onFailure(onError))
         .catch(onError => {
-            console.log(onError);
+            log.error(onError);
         });
 
     function onSuccess(data) {
@@ -52,8 +53,8 @@ router.get('/update', (req, res) => {
                 onSaved => res.send('Posts are parsed and saved to database: ' + onSaved),
                 onError => res.send("Error during saving posts: " + onError.message)
             ).catch(onError => {
-            console.log(onError);
-        });
+                log.error(onError);
+            });
     }
 });
 

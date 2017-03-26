@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var config = require('./../config');
+const log = require('winston');
 
 var db = mongoose.connection;
 
@@ -7,12 +8,12 @@ function connectToDatabase(onConnected, onError) {
     mongoose.connect(config.DATABASE_CONNECTION_URL);
 
     db.once('open', function callback() {
-        console.log("Connected to DB!");
+        log.info("Connected to DB: " + config.DATABASE_CONNECTION_URL);
         onConnected('success');
     });
 
     db.on('error', function (err) {
-        console.log('Connection error:', err.message);
+        log.error('Connection error:', err.message);
         onError(err);
     });
 }

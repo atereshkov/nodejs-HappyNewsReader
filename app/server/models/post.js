@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+const log = require('winston');
 
 var Post = new Schema({
     header: {type: String, required: true},
@@ -14,7 +15,7 @@ Post.statics.isAlreadyExists = function (post) {
 
         PostModel.count({url: post.url}, function (err, count) {
             if (err) {
-                console.log(err);
+                log.error(err);
                 onError(err);
             }
 
@@ -49,19 +50,19 @@ function savePosts(posts, onSaved, onError) {
 
         PostModel.isAlreadyExists(post)
             .then(
-                onExist => console.log("Post with url " + post.url + " already exists in database: " + onExist),
+                onExist => log.info("Post with url " + post.url + " already exists in database: " + onExist),
                 onNoRecord => save(),
-                onError => console.log(onError))
+                onError => log.error(onError))
             .catch(onError => {
-                console.log(onError);
+                log.error(onError);
             });
 
         function save() {
             post.save(function (err) {
                 if (err) {
-                    console.log('Error', err);
+                    log.error('Error', err);
                 } else {
-                    console.log("Post with url " + posts[i].url + " saved");
+                    log.info("Post with url " + posts[i].url + " saved");
                     savedPostsCount++;
                 }
             });
