@@ -10,7 +10,21 @@ var request = require("request"),
 // todo extract middleware functions and code refactor
 
 router.get('/', (req, res) => {
-    res.send('Hello World from posts!')
+
+    Post.find().then(onSuccess, onFailure);
+
+    function onSuccess(data) {
+        return res.json({
+            status: 'OK',
+            count_all: data.length,
+            data: data
+        });
+    }
+
+    function onFailure(error) {
+        res.send("Error: " + error);
+        next(new Error(error));
+    }
 });
 
 router.get('/update', (req, res) => {
@@ -24,12 +38,24 @@ router.get('/update', (req, res) => {
         });
 
     function onSuccess(data) {
-        res.send('Posts are parsed: ' + data.length);
+        saveToDatabase(data);
     }
 
     function onFailure(error) {
         res.send("Error: " + error);
         next(new Error(error));
+    }
+
+    function saveToDatabase(data) {
+        //Post.existWithUrl().then();
+
+        Post.savePosts(data)
+            .then(
+                onSaved => res.send('Posts are parsed and saved to database: ' + data.length),
+                onError => res.send("Error during saving posts: " + onError.message)
+            ).catch(onError => {
+                console.log(onError);
+            });
     }
 });
 
@@ -60,6 +86,7 @@ router.get('/:id', function (req, res) {
     });
 });
 
+/*
 router.post('/', function (req, res) {
 
     var post = new Post({
@@ -105,5 +132,6 @@ router.post('/', function (req, res) {
     });
 
 });
+*/
 
 module.exports = router;
