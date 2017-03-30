@@ -1,0 +1,14 @@
+<div *ngIf="posts" >
+  <ul>
+    <li *ngFor="let post of posts">
+      <div class="news_header" >{{post.header}}</div>
+      <div class="news_text">{{post.text}}
+        <span class=read_more>
+          <a href="{{post.url}}">Дальше больше</a>
+        </span>
+      </div>
+
+      <img *ngIf="post.img?.length>0" class="news_image" src="{{post.img}}" alt="event">
+    </li>
+  </ul>
+</div>
