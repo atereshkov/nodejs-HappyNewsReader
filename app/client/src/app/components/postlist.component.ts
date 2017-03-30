@@ -15,23 +15,22 @@ export class PostsComponent implements OnInit{
 
  posts:SummaryPost[];
 
-constructor(private postService:PostService){}
+constructor(private postService:PostService){
+}
 
   ngOnInit(){
     this.getAllPosts();
-    // this.highlightLinks();
   }
   getAllPosts(){
-    this.postService.getAllPosts().subscribe(comments =>{
-      this.posts=comments.data;
-      console.log("getting ");
-      console.log(this.posts);
+    this.postService.getAllPosts().subscribe(recievedPosts =>{
+      this.posts=recievedPosts.data;
+      this.removeLinks();
     });
   }
 
-  highlightLinks(){
+  removeLinks(){
     for(var i=0;i<this.posts.length;i++){
-      this.posts[i].text=this.posts[i].text.substr(0,this.posts[i].text.length-1-16);
+      this.posts[i].text=this.posts[i].text.substr(0,this.posts[i].text.length-1-15);
     }
   }
 }
