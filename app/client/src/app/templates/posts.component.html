@@ -8,7 +8,7 @@
         </span>
       </div>
 
-      <img class="news_image" src="{{post.img}}" alt="event">
+      <img *ngIf="post.img?.length>0" class="news_image" src="{{post.img}}" alt="event">
     </li>
   </ul>
 </div>
