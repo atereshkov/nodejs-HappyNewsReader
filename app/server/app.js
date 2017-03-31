@@ -35,11 +35,11 @@ function startServer() {
 
 function startCron() {
     cron.schedule('*/1 * * * *', function(){
-        request("http://localhost:3000/api/v1/posts/update", function (error, response, body) {
+        request("http://localhost:3000/api/v1/updater", function (error, response, body) {
             if (error) {
                 log.error("Error: " + error);
             } else {
-                log.info("Cron request for update posts.");
+                log.info("Cron request for posts update..");
             }
         });
     });

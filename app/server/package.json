@@ -5,6 +5,7 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
+    "await": "^0.2.6",
     "body-parser": "^1.17.1",
     "cheerio": "^0.22.0",
     "express": "~4.14.1",
