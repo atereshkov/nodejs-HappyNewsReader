@@ -19,9 +19,11 @@ constructor(private postService:PostService){
 }
 
   ngOnInit(){
-    this.getAllPosts();
+    this.getParsedPosts();
   }
-  getAllPosts(){
+
+
+  getParsedPosts(){
     this.postService.getAllPosts().subscribe(recievedPosts =>{
       this.posts=recievedPosts.data;
       this.removeLinks();
