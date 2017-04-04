@@ -9,6 +9,8 @@ const request = require("request");
 const routes = require('./routes');
 const config = require('./config');
 const db = require('./database/connection');
+var Updater = require('./models/updater');
+
 // var path = require('path');
 
 db()
@@ -17,6 +19,7 @@ db()
         onError => log.error("Error due connection to db: " + onError.message)
     )
     .then(startCron)
+    .then(initUpdater)
     .catch(onError => {
         log.error(onError);
     });
@@ -42,6 +45,27 @@ function startCron() {
                 log.info("Cron request for posts update..");
             }
         });
+    });
+}
+
+function initUpdater() {
+    let updater = new Updater({
+        status: "stopped",
+        name: "ru1-server"
+    });
+
+    Updater.count({name: updater.name}, function (err, count) {
+        if (count > 0) {
+            log.info('updater with name ' + updater.name + ' already exists');
+        } else {
+            updater.save(function (err) {
+                if (err) {
+                    log.error('Error', err);
+                } else {
+                    log.info("initUpdater success");
+                }
+            });
+        }
     });
 }
 
