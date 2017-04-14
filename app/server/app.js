@@ -34,14 +34,16 @@ function startServer() {
 }
 
 function startCron() {
-    updater()
-        .then(
-            onUpdated => log.info("Data updated from cron.."),
-            onError => log.error("Error: " + onError.message)
-        )
-        .catch(onError => {
-            log.error(onError);
-        });
+    cron.schedule('*/1 * * * *', function () {
+        updater()
+            .then(
+                onUpdated => log.info("Data updated from cron.."),
+                onError => log.error("Error: " + onError.message)
+            )
+            .catch(onError => {
+                log.error(onError);
+            });
+    });
 }
 
 module.exports = app;
