@@ -1,15 +1,21 @@
-var express = require('express');
-var router = express.Router();
-var parser = require('../parse/parser');
+const express = require('express');
+const router = express.Router();
+const parser = require('../parse/parser');
 const log = require('winston');
 
-var Post = require('../models/post');
+const Post = require('../models/post');
 
 // todo extract middleware functions and code refactor
 
 router.get('/', (req, res) => {
 
-    Post.find().then(onSuccess, onFailure);
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+
+    Post.find()
+        .limit(limit)
+        .skip(limit * (page - 1))
+        .then(onSuccess, onFailure);
 
     function onSuccess(data) {
         return res.json({
@@ -51,5 +57,7 @@ router.get('/:id', function (req, res) {
         }
     });
 });
+
+
 
 module.exports = router;
