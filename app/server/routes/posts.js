@@ -19,8 +19,7 @@ router.get('/', (req, res) => {
 
     function onSuccess(data) {
         return res.json({
-            status: 'OK',
-            count_all: data.length,
+            count: data.length,
             data: data
         });
     }
@@ -51,13 +50,27 @@ router.get('/:id', function (req, res) {
             });
         } else {
             return res.json({
-                status: 'OK',
                 data: post
             });
         }
     });
 });
 
+router.delete('/', function (req, res) {
+
+    Post.remove({}, function (err) {
+        if (err) {
+            res.statusCode = 500;
+            return res.json({
+                error: 'Server error'
+            });
+        } else {
+            return res.json({
+                status: 'OK'
+            });
+        }
+    });
+});
 
 
 module.exports = router;
