@@ -30,7 +30,6 @@ function startServer() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(config.get('api:base'), routes);
-    // app.use(express.static(path.join(__dirname,config.STATIC_RESOURCES_PATH)));
 
     app.listen(config.get('server:port'), function () {
         log.info(`Server started and working on ${config.get('server:port')}`)
@@ -38,7 +37,7 @@ function startServer() {
 }
 
 function startCron() {
-    cron.schedule('*/1 * * * *', function () {
+    cron.schedule(config.get('cron:update-rule'), function () {
         updater()
             .then(
                 onUpdated => log.info("Data updated from cron.."),

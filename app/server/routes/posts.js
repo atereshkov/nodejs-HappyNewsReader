@@ -5,9 +5,6 @@ const log = require('winston');
 
 var Post = require('../models/post');
 
-var request = require("request"),
-    cheerio = require("cheerio");
-
 // todo extract middleware functions and code refactor
 
 router.get('/', (req, res) => {
@@ -54,52 +51,5 @@ router.get('/:id', function (req, res) {
         }
     });
 });
-
-/*
-router.post('/', function (req, res) {
-
-    var post = new Post({
-        header: req.body.header,
-        text: req.body.text,
-        url: req.body.url,
-        img: req.body.img
-    });
-
-    Post.count({header: req.body.header}, function (err, count) {
-        if (count > 0) {
-            res.statusCode = 409;
-            return res.json({
-                error: 'Post with this header already exists'
-            });
-        } else {
-            post.save(function (err) {
-                if (err) {
-                    console.log('Error', err);
-
-                    if (err.name === 'ValidationError') {
-                        res.statusCode = 400;
-                        res.json({
-                            error: 'Validation error'
-                        });
-                    } else {
-                        res.statusCode = 500;
-
-                        res.json({
-                            error: 'Server error'
-                        });
-                    }
-                } else {
-                    return res.json({
-                        status: 'OK',
-                        data: post
-                    });
-
-                }
-            });
-        }
-    });
-
-});
-*/
 
 module.exports = router;

@@ -1,11 +1,11 @@
 var request = require("request"),
     cheerio = require("cheerio");
 
-var config = require('../config');
+const config = require('nconf');
 const log = require('winston');
 
 function requestPosts(onParsed, onError) {
-    request(config.SITE_URL, function (error, response, body) {
+    request(config.get('site'), function (error, response, body) {
         if (error) {
             log.error("Error: " + error);
             onError(error);

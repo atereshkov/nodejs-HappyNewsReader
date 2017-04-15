@@ -8,5 +8,8 @@
   },
   "database": {
     "url": "mongodb://user:root@ds131900.mlab.com:31900/hnreader"
+  },
+  "cron": {
+    "update-rule": "*/1 * * * *"
   }
 }
