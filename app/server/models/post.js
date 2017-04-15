@@ -6,7 +6,8 @@ var Post = new Schema({
     header: {type: String, required: true},
     text: {type: String, required: true},
     url: {type: String, required: true},
-    img: {type: String, required: false}
+    img: {type: String, required: false},
+    created_at: {type: Date, required: false}
 });
 
 Post.statics.isAlreadyExists = function (post) {
@@ -45,7 +46,8 @@ function savePosts(posts, onSaved, onError) {
             header: posts[i].header,
             text: posts[i].text,
             url: posts[i].url,
-            img: posts[i].img
+            img: posts[i].img,
+            created_at: new Date() // Math.floor(Date.now() / 1000)
         });
 
         PostModel.isAlreadyExists(post)
