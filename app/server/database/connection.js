@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
-var config = require('./../config');
+const config = require('nconf');
 const log = require('winston');
 
 var db = mongoose.connection;
 
 function connectToDatabase(onConnected, onError) {
-    mongoose.connect(config.DATABASE_CONNECTION_URL);
+    mongoose.connect(config.get('database:url'));
 
     db.once('open', function callback() {
-        log.info("Connected to DB: " + config.DATABASE_CONNECTION_URL);
+        log.info("Connected to DB: " + config.get('database:url'));
         onConnected('success');
     });
 

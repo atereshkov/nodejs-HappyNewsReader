@@ -1,0 +1,12 @@
+{
+  "site": "http://s13.ru/",
+  "server": {
+    "port": 3000
+  },
+  "api": {
+    "base": "/api/v1"
+  },
+  "database": {
+    "url": "mongodb://user:root@ds131900.mlab.com:31900/hnreader"
+  }
+}
