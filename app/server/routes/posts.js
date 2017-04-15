@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const parser = require('../parse/parser');
-
 const Post = require('../models/post');
 
 // todo extract middleware functions and code refactor
@@ -14,7 +12,7 @@ router.get('/', (req, res) => {
     Post.find()
         .limit(limit)
         .skip(limit * (page - 1))
-        .sort({created_at: -1})
+        .sort({created_at: 1})
         .then(onSuccess, onFailure);
 
     function onSuccess(data) {

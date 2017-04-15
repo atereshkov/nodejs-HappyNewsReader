@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const httpLogger = require('morgan');
 const cron = require('node-cron');
 const log = require('winston');
-const updater = require('./parse/updater');
+const updater = require('./domain/updater');
 
 const routes = require('./routes');
 const db = require('./database/connection');

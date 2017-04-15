@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const config = require('nconf');
 const log = require('winston');
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 function connectToDatabase(onConnected, onError) {
     mongoose.connect(config.get('database:url'));

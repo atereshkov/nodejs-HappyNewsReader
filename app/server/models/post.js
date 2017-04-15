@@ -1,13 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const log = require('winston');
+const analyzer = require('../domain/analyzer');
 
 var Post = new Schema({
     header: {type: String, required: true},
     text: {type: String, required: true},
     url: {type: String, required: true},
     img: {type: String, required: false},
-    created_at: {type: Date, required: false}
+    created_at: {type: Date, required: false},
+    score: {type: Number, required: false}
 });
 
 Post.statics.isAlreadyExists = function (post) {
@@ -47,6 +49,7 @@ function savePosts(posts, onSaved, onError) {
             text: posts[i].text,
             url: posts[i].url,
             img: posts[i].img,
+            score: analyzer(posts[i].header).score,
             created_at: new Date() // Math.floor(Date.now() / 1000)
         });
 

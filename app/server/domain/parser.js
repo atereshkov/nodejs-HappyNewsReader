@@ -1,4 +1,4 @@
-var request = require("request"),
+const request = require("request"),
     cheerio = require("cheerio");
 
 const config = require('nconf');

@@ -1,5 +1,5 @@
 const log = require('winston');
-var parser = require('../parse/parser');
+var parser = require('../domain/parser');
 var Post = require('../models/post');
 
 function updatePosts(onUpdated, onError) {
