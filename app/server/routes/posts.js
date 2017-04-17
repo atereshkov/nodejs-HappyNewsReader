@@ -28,6 +28,24 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/all', (req, res) => {
+
+    Post.find()
+        .then(onSuccess, onFailure);
+
+    function onSuccess(data) {
+        return res.json({
+            count: data.length,
+            data: data
+        });
+    }
+
+    function onFailure(error) {
+        res.send("Error: " + error);
+        next(new Error(error));
+    }
+});
+
 router.get('/:id', function (req, res) {
 
     Post.findById(req.params.id, function (err, post) {

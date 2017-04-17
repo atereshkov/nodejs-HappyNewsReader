@@ -53,7 +53,7 @@ function savePosts(posts, onSaved, onError) {
             url: posts[i].url,
             img: posts[i].img,
             score: score,
-            positive: score > 0,
+            positive: score >= 0,
             created_at: new Date() // Math.floor(Date.now() / 1000)
         });
 
