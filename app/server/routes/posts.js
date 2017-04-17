@@ -9,10 +9,10 @@ router.get('/', (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const page = parseInt(req.query.page) || 1;
 
-    Post.find()
+    Post.find({'positive': true})
         .limit(limit)
         .skip(limit * (page - 1))
-        .sort({created_at: 1})
+        .sort({created_at: -1})
         .then(onSuccess, onFailure);
 
     function onSuccess(data) {
