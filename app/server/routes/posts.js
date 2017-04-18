@@ -9,10 +9,28 @@ router.get('/', (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const page = parseInt(req.query.page) || 1;
 
-    Post.find()
+    Post.find({'positive': true})
         .limit(limit)
         .skip(limit * (page - 1))
-        .sort({created_at: 1})
+        .sort({created_at: -1})
+        .then(onSuccess, onFailure);
+
+    function onSuccess(data) {
+        return res.json({
+            count: data.length,
+            data: data
+        });
+    }
+
+    function onFailure(error) {
+        res.send("Error: " + error);
+        next(new Error(error));
+    }
+});
+
+router.get('/all', (req, res) => {
+
+    Post.find()
         .then(onSuccess, onFailure);
 
     function onSuccess(data) {

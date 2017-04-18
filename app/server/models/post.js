@@ -9,7 +9,8 @@ var Post = new Schema({
     url: {type: String, required: true},
     img: {type: String, required: false},
     created_at: {type: Date, required: false},
-    score: {type: Number, required: false}
+    score: {type: Number, required: false},
+    positive: {type: Boolean, required: false}
 });
 
 Post.statics.isAlreadyExists = function (post) {
@@ -44,12 +45,15 @@ function savePosts(posts, onSaved, onError) {
     let savedPostsCount = 0;
 
     for (let i = 0; i < posts.length; i++) {
+        var score = analyzer(posts[i].header).score;
+
         let post = new PostModel({
             header: posts[i].header,
             text: posts[i].text,
             url: posts[i].url,
             img: posts[i].img,
-            score: analyzer(posts[i].header).score,
+            score: score,
+            positive: score >= 0,
             created_at: new Date() // Math.floor(Date.now() / 1000)
         });
 
