@@ -1,2 +1,10 @@
-<h1>{{title}}<h1>
-<router-outlet><router-outlet>
+<h1>{{title}}</h1>
+<input type="number" [(ngModel)]="limit">
+<div id="setupButtons">
+  <button (click)="addLimit()">Set limit</button>
+  <button (click)="readNews()">Read!</button>
+</div>
+
+<router-outlet>
+</router-outlet>
+
