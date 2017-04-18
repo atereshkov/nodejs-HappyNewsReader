@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     localStorage.setItem("page", "1");
-    localStorage.setItem("limit", this.limit);
   }
 
   addLimit() {
@@ -26,8 +25,8 @@ export class AppComponent implements OnInit {
   }
 
   readNews() {
-    this.added=false;
+    this.added = false;
+    localStorage.setItem('limit', this.limit);
     this.router.navigate(['/posts']);
-
   }
 }
