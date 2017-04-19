@@ -8,12 +8,13 @@ import {AppRoutingModule} from './app-routes.module';
 import {PostsComponent} from './components/postlist.component';
 import {PostService} from './services/post.service';
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import {IndexedDbService} from "./services/indexed-db-service";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent
+    PostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +23,7 @@ import {InfiniteScrollModule} from "ngx-infinite-scroll";
     InfiniteScrollModule,
     AppRoutingModule
   ],
-  providers: [PostService],
+  providers: [PostService, IndexedDbService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

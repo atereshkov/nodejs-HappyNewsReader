@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 
-import {PostService} from '../services/post.service';
-import {SummaryPost} from '../domain/summarypost';
+import {PostService} from "../services/post.service";
+import {SummaryPost} from "../domain/summarypost";
+import {IndexedDbService} from "../services/indexed-db-service";
 
 @Component({
   selector: "posts-list",
@@ -21,7 +21,8 @@ export class PostsComponent implements OnInit {
 
   isInCompleted: boolean = false;
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService,
+              private indexedDbService: IndexedDbService) {
   }
 
   ngOnInit() {
@@ -40,6 +41,7 @@ export class PostsComponent implements OnInit {
 
         for (var i = 0; i < this.unParsedPosts.length; i++) {
           this.posts.push(this.unParsedPosts[i]);
+          this.indexedDbService.addPost(this.unParsedPosts[i]);
         }
         this.page++;
         this.isInCompleted = false;

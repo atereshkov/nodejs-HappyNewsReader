@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
+import {IndexedDbService} from "./services/indexed-db-service";
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,16 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private indexedDbService: IndexedDbService) {
   }
+
 
   title = "Happy News Reader for S13.ru. Enjoy your news!";
 
   limit: string = "10";
   added = true;
+
 
   ngOnInit() {
     localStorage.setItem("page", "1");
@@ -22,6 +26,7 @@ export class AppComponent implements OnInit {
 
   addLimit() {
     localStorage.setItem('limit', this.limit);
+
   }
 
   readNews() {
