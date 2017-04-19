@@ -16,9 +16,9 @@ export class PostsComponent implements OnInit {
   unParsedPosts: SummaryPost[] = new Array<SummaryPost>();
 
 
-  limit: number = Number.parseInt(localStorage.getItem("limit")) || 5;
+  limit: number = Number.parseInt(localStorage.getItem("limit"));
 
-  page: number = Number.parseInt(localStorage.getItem("page")) || 1;
+  page: number = Number.parseInt(localStorage.getItem("page"));
 
   isInCompleted: boolean = false;
 
@@ -37,7 +37,7 @@ export class PostsComponent implements OnInit {
 
 
       if (recievedPosts.data.length > 0) {
-        
+
         this.unParsedPosts = recievedPosts.data;
         this.removeLinks(this.unParsedPosts);
 
@@ -46,6 +46,7 @@ export class PostsComponent implements OnInit {
           this.posts.push(this.unParsedPosts[i]);
 
           this.indexedDbService.addPost(this.unParsedPosts[i]);
+
         }
         this.page++;
         this.isInCompleted = false;
