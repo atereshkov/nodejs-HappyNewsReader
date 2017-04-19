@@ -40,7 +40,8 @@ export class IndexedDbService {
   getPosts(page: number, limit: number) {
     db.getAll('posts').then((posts) => {
 
-      console.log(posts.slice(page * limit, page * limit + 10));
+      console.log(posts.reverse().slice((page-2) * limit, (page-2) * limit+limit));
+
 
 
     }, (error) => {
