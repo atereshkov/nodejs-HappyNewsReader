@@ -19,7 +19,7 @@ export class IndexedDbService {
 
 
   addPost(summaryPost: SummaryPost) {
-    db.add('posts',summaryPost,).then(() => {
+    db.add('posts', summaryPost,).then(() => {
 
     }, (error) => {
       console.log(error);
@@ -37,8 +37,15 @@ export class IndexedDbService {
 
   }
 
-  getPosts() {
+  getPosts(page: number, limit: number) {
+    db.getAll('posts').then((posts) => {
 
+      console.log(posts.slice(page * limit, page * limit + 10));
+
+
+    }, (error) => {
+      console.log("EROR");
+    });
   }
 
 

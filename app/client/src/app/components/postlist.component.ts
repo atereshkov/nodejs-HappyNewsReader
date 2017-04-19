@@ -15,7 +15,8 @@ export class PostsComponent implements OnInit {
   posts: SummaryPost[] = new Array<SummaryPost>();
   unParsedPosts: SummaryPost[] = new Array<SummaryPost>();
 
-  limit: number = Number.parseInt(localStorage.getItem("limit")) || 10;
+
+  limit: number = Number.parseInt(localStorage.getItem("limit")) || 5;
 
   page: number = Number.parseInt(localStorage.getItem("page")) || 1;
 
@@ -34,13 +35,16 @@ export class PostsComponent implements OnInit {
 
     this.postService.getPosts(this.page.toString(), this.limit.toString()).subscribe(recievedPosts => {
 
-      if (recievedPosts.data.length > 0) {
 
+      if (recievedPosts.data.length > 0) {
+        
         this.unParsedPosts = recievedPosts.data;
         this.removeLinks(this.unParsedPosts);
 
         for (var i = 0; i < this.unParsedPosts.length; i++) {
+
           this.posts.push(this.unParsedPosts[i]);
+
           this.indexedDbService.addPost(this.unParsedPosts[i]);
         }
         this.page++;

@@ -23,5 +23,4 @@ export class PostService {
       //...errors if any
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
-
 }
