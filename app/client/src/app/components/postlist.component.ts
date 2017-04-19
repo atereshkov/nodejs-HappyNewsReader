@@ -19,6 +19,8 @@ export class PostsComponent implements OnInit {
 
   page: number = Number.parseInt(localStorage.getItem("page")) || 1;
 
+  isInCompleted: boolean = false;
+
   constructor(private postService: PostService) {
   }
 
@@ -28,13 +30,20 @@ export class PostsComponent implements OnInit {
 
 
   getParsedPosts() {
+
     this.postService.getPosts(this.page.toString(), this.limit.toString()).subscribe(recievedPosts => {
-      this.unParsedPosts = recievedPosts.data;
-      this.removeLinks(this.unParsedPosts);
-      for (var i = 0; i < this.unParsedPosts.length; i++) {
-        this.posts.push(this.unParsedPosts[i]);
+
+      if (recievedPosts.data.length > 0) {
+
+        this.unParsedPosts = recievedPosts.data;
+        this.removeLinks(this.unParsedPosts);
+
+        for (var i = 0; i < this.unParsedPosts.length; i++) {
+          this.posts.push(this.unParsedPosts[i]);
+        }
+        this.page++;
+        this.isInCompleted = false;
       }
-      this.page++;
     });
   }
 
