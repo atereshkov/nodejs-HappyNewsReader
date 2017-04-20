@@ -16,23 +16,9 @@ export class AppComponent implements OnInit {
 
   title = "Happy News Reader for S13.ru. Enjoy your news!";
 
-  // limit: string = "10";
-  // added = true;
-
 
   ngOnInit() {
     localStorage.setItem("page", "1");
     localStorage.setItem("limit","5");
   }
-
-  // addLimit() {
-  //   localStorage.setItem('limit', this.limit);
-  //
-  // }
-
-  // readNews() {
-  //   this.added = false;
-  //   localStorage.setItem('limit', this.limit);
-  //   this.router.navigate(['/posts']);
-  // }
 }
