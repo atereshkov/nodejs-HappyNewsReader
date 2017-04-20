@@ -7,7 +7,7 @@ import {PostsWrapper} from '../domain/postswrapper';
 
 @Injectable()
 export class PostService {
-  // Resolve HTTP using the constructor
+
   constructor(private http: Http) {
   }
 
@@ -19,4 +19,3 @@ export class PostService {
       .map((res: Response) => res.json());
   }
 }
-// ...errors if any
