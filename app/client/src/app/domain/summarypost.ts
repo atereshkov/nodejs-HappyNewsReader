@@ -6,4 +6,3 @@ export class SummaryPost {
               public img: string) {
   }
 }
-

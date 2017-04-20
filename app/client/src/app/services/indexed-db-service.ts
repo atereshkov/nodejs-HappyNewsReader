@@ -31,7 +31,7 @@ export class IndexedDbService {
         'posts', {keyPath: "_id"});
     }).then(() => {
       return db.getAll('posts').then((posts) => {
-        return posts.reverse().slice((page-1) * limit, (page-1) * limit + limit);
+        return posts.reverse().slice((page - 1) * limit, (page - 1) * limit + limit);
       }, (error) => {
         console.log(error);
       });

@@ -43,8 +43,7 @@ export class PostsComponent implements OnInit {
           this.removeLinks(this.unParsedPosts);
 
           for (var i = 0; i < this.unParsedPosts.length; i++) {
-            if(!this.posts.includes(this.unParsedPosts[i]))
-            {
+            if (!this.posts.includes(this.unParsedPosts[i])) {
               this.posts.push(this.unParsedPosts[i]);
             }
             this.indexedDbService.addPost(this.unParsedPosts[i]);
@@ -56,7 +55,6 @@ export class PostsComponent implements OnInit {
         }
       },
       (error) => {
-//Your other codes
         if (error.status == 0 || error.status == 500) {
 
           this.indexedDbService.getPosts(this.page, this.limit).then((value) => {
@@ -68,7 +66,7 @@ export class PostsComponent implements OnInit {
               this.posts.push(this.unParsedPosts[0]);
             }
             for (var j = 0; j < this.unParsedPosts.length; j++) {
-              if(!this.posts.includes(this.unParsedPosts[j])){
+              if (!this.posts.includes(this.unParsedPosts[j])) {
                 this.posts.push(this.unParsedPosts[j]);
               }
             }
