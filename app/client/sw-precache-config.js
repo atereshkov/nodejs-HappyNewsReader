@@ -5,6 +5,7 @@ module.exports = {
   maximumFileSizeToCacheInBytes: 30000000,
   staticFileGlobs: [
     'dist/index.html',
+    'dist/**.jpg',
     'dist/**.js',
     'dist/**.css',
     'dist/**.map'
