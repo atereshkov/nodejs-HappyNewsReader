@@ -4,6 +4,7 @@ import {PostsComponent} from './components/postlist.component';
 const routes: Routes = [
   {path: '', redirectTo: '/posts', pathMatch: 'full'},
   {path: 'posts', component: PostsComponent},
+  {path: '**' , redirectTo:'/posts',pathMatch:'full'}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
