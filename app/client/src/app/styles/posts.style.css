@@ -5,16 +5,15 @@ div {
 div.news_header {
   font-family: sans-serif;
   font-style: italic;
-  font-size:50px;
+  font-size:40px;
   color: maroon;
   text-align:center;
 
-  margin: 5%;
 }
 
 div.news_text {
 
-  margin-top:5%;
+  margin-top:3%;
   padding:1%;
   text-align:left;
   padding:1% 10%;
