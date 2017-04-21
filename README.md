@@ -21,10 +21,6 @@ The service provides access to news with "positive/happy” orientation. This me
 
 ## Additional functionality
 
-* Users registration and authorization
-* Ability to add posts to user’s favorites
-* Search for posts by some criteria (post header)
-* Get posts by weeks (for example, from 03/19/2017 to 03/26/2017)
 * Pagination
 
 ## Use case diagram
@@ -60,5 +56,5 @@ Coming soon...
 ## Start client
 * Go to app/client folder
 * Run npm install
-* For serve run npm start
-* For static-serve run npm static-serve
+* For serve run 'npm start'
+* For static-serve run 'npm run static-serve'
