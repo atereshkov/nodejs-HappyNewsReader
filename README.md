@@ -57,9 +57,8 @@ Coming soon...
 * Run npm install
 * Run npm start
 
-#Start client
-
-*Go to app/client folder
-*Run npm install
-*For serve run npm start
-*For static-serve run npm static-serve
+## Start client
+* Go to app/client folder
+* Run npm install
+* For serve run npm start
+* For static-serve run npm static-serve
