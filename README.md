@@ -56,5 +56,5 @@ Coming soon...
 ## Start client
 * Go to app/client folder
 * Run npm install
-* For serve run 'npm start'
+* For in-memory serve run 'npm start'
 * For static-serve run 'npm run static-serve'
