@@ -57,4 +57,4 @@ Coming soon...
 * Go to app/client folder
 * Run npm install
 * For in-memory serve run 'npm start'
-* For static-serve run 'npm run static-serve'
+* For static-serve run 'ng build && npm run static-serve'
